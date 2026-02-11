@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Faith Izzy ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow:hidden;
+    text-align:center;
+    color:white;
+}
+
+/* PASSWORD SCREEN */
+#lockScreen{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:#ff4d6d;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:100;
+}
+
+input{
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    text-align:center;
+}
+
+button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    margin:10px;
+    background:white;
+    color:#ff4d6d;
+    font-weight:bold;
+}
+
+/* MAIN CONTENT */
+.container{
+    padding-top:60px;
+    display:none;
+}
+
+h1{
+    font-size:28px;
+}
+
+/* SLIDESHOW */
+.slideshow{
+    width:300px;
+    height:300px;
+    margin:auto;
+    overflow:hidden;
+    border-radius:20px;
+}
+
+.slideshow img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* LOVE LETTER */
+#letter{
+    display:none;
+    background:white;
+    color:#ff4d6d;
+    padding:20px;
+    border-radius:20px;
+    width:70%;
+    margin:20px auto;
+}
+
+/* HEARTS */
+.heart{
+    position:absolute;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    0%{transform:translateY(100vh);}
+    100%{transform:translateY(-10vh);}
+}
+
+/* FIREWORK */
+.firework{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+@keyframes explode{
+    from{transform:scale(1);}
+    to{transform:scale(15); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div id="lockScreen">
+    <h2>Enter our special password ❤️</h2>
+    <input type="password" id="password" placeholder="Hint: anniversary">
+    <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN CONTENT -->
+<div class="container" id="mainContent">
+    <h1>FAITH IZZY C. BENGIL 💖</h1>
+    <h2>Will you be my Valentine?</h2>
+
+    <button onclick="sayYes()">YES 💘</button>
+    <button id="noBtn">NO 🙈</button>
+
+    <div class="slideshow">
+        <!-- PUT YOUR PICTURES HERE -->
+        <img id="slide" src="photo1.jpg">
+    </div>
+
+    <button onclick="showLetter()">Open Love Letter 💌</button>
+
+    <div id="letter">
+        BY,
+        From the moment you came into my life, everything felt brighter.
+        Your smile, your laugh, your presence they mean more to me than words can explain.
+        wla koy kwarta karong valentines pero celebrate ra dyapon na to iloveyouuu. ❤️
+    </div>
+</div>
+
+<script>
+
+/* PASSWORD FUNCTION */
+function unlock(){
+    const pass = document.getElementById("password").value;
+    if(pass === "0329"){  // CHANGE PASSWORD HERE
+        document.getElementById("lockScreen").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+        document.getElementById("music").play();
+    } else {
+        alert("Wrong password ❤️ Try again!");
+    }
+}
+
+/* SLIDESHOW */
+const images = ["image/2e14897e-fced-4e02-b094-137ab523e5ee.jpg","image/93eadb3e-4393-40f1-a278-a3c2171d3cee.jpg","image/b0fd4d3e-f07f-44a4-b957-6c02ed5256a2.jpg"];
+let index = 0;
+setInterval(()=>{
+    index = (index+1)%images.length;
+    document.getElementById("slide").src = images[index];
+},3000);
+
+/* NO BUTTON RUNS AWAY */
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*80+"%";
+    noBtn.style.top=Math.random()*80+"%";
+});
+
+/* YES FUNCTION */
+function sayYes(){
+    createHearts(40);
+    createFireworks(30);
+    alert("You just made me the happiest person alive ❤️");
+}
+
+/* HEARTS */
+function createHearts(num){
+    for(let i=0;i<num;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=Math.random()*20+15+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    }
+}
+
+/* FIREWORKS */
+function createFireworks(num){
+    for(let i=0;i<num;i++){
+        let fire=document.createElement("div");
+        fire.className="firework";
+        fire.style.left=Math.random()*100+"vw";
+        fire.style.top=Math.random()*100+"vh";
+        fire.style.background="hsl("+Math.random()*360+",100%,60%)";
+        document.body.appendChild(fire);
+        setTimeout(()=>fire.remove(),1000);
+    }
+}
+
+/* LETTER */
+function showLetter(){
+    document.getElementById("letter").style.display="block";
+}
+</script>
+
+</body>
+</html>
